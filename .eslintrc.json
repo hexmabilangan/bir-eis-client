@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:jest/all"
+  ],
+  "plugins": [
+    "jest"
+  ],
+  "rules": {
+    "camelcase": "off"
+  }
+}
