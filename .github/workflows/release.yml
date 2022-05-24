@@ -12,6 +12,7 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
+      - run: npm run build
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@master
         env:
