@@ -32,3 +32,4 @@ You can download the EXE file from this project or use this as a module. You can
   "log": "info"
 }
 ```
+
