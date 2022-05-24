@@ -2,17 +2,16 @@ on:
   release:
     types: [created]
 name: Handle Release
+
 jobs:
-  generate:
-    name: Create release-artifacts
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@master
-      - name: Generate the artifacts
-        uses: skx/github-action-build@master
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          builder: .github/build
+          node-version: 16
+      - run: npm ci
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@master
         env:
