@@ -17,7 +17,8 @@ You can download the EXE file from this project or use this as a module. You can
 1. Check the Releases section, and download the latest Windows binary
 2. Create a file named `config.json` in the same directory as the binary. See [template below](#configjson)
 3. From a terminal, run `bir-eis-client <command> [options]`
-  * **<command>** - can be `authorize`, `send-invoices`, `inquire-invoices`
+    * `command` - can be `authorize`, `send-invoices`, `inquire-invoices`
+    * `options` - use `--help` to get details
 
 <a name="configjson"></a>
 # Configuration
