@@ -1,6 +1,6 @@
 # BIR EIS - Client to connect to BIR-EIS
 
-A client to connect to BIR EIS API as [documented here](https://eis-cert.bir.gov.ph/#/downloads/17)
+A client to connect to BIR EIS API as documented in the [API Development Guide v2.01](https://eis-cert.bir.gov.ph/#/downloads/17)
 
 The objective of this project is to be able to transmit invoices via CSV files and produce a report via CSV.
 
