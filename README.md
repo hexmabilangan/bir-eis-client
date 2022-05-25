@@ -39,6 +39,6 @@ You can download the EXE file from this project or use this as a module. You can
 }
 ```
 
-# Contribution
+# Contribute
 
-Any form of contribution is welcome.
+Any form of contribution is welcome like develop features, test, documentation, etc. Maraming salamat!
