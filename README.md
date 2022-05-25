@@ -4,7 +4,7 @@ A client to connect to BIR EIS API as [documented here](https://eis-cert.bir.gov
 
 The objective of this project is to be able to transmit invoices via CSV files and produce a report via CSV.
 
-You can download the EXE file from this project or use this as a module. You can also build your binaries. See [pkg module](https://www.npmjs.com/package/pkg).
+You can download the binary files in the **Release section** or use this as a module. You can also build your binaries. See [pkg module](https://www.npmjs.com/package/pkg).
 
 **NOTE: Use this at your own risk. See [LICENSE](LICENSE)**
 
