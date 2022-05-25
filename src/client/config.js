@@ -10,7 +10,6 @@ const defaults = {
 
 function configure(cfg = {}) {
   Object.assign(config, defaults, cfg);
-  log.info(`Log level: ${config.log}`);
   log.setLevel(config.log);
 }
 

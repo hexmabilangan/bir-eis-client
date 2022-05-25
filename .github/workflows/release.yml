@@ -1,8 +1,8 @@
 on:
   release:
     types: [created]
-name: Handle Release
 
+name: Handle Release
 jobs:
   build:
     runs-on: ubuntu-latest

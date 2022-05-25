@@ -2,21 +2,26 @@
 
 A client to connect to BIR EIS API as [documented here](https://eis-cert.bir.gov.ph/#/downloads/17)
 
-You can download the EXE file from this project or use this as a module. You can also build your own binaries, see [pkg](https://www.npmjs.com/package/pkg)
+The objective of this project is to be able to transmit invoices via CSV files and produce a report via CSV.
+
+You can download the EXE file from this project or use this as a module. You can also build your binaries. See [pkg module](https://www.npmjs.com/package/pkg).
 
 **NOTE: Use this at your own risk. See [LICENSE](LICENSE)**
 
-### What it can do?
-* authenticate
-* send invoices (not yet implemented)
-* inquire result (not yet implemented)
+## Features
+  * authenticate
+  * send invoices (for development)
+  * inquire invoices (for development)
 
-## CLI Usage
-1. Create a file named `config.json` in the same directory as the binary. See template below
-2. From a terminal, run `bir-eis-client action [parameters]`
-  * [action] - can be `authorize`, `invoices`, `invoice-result`
+# Quick Guide
+1. Check the Releases section, and download the latest Windows binary
+2. Create a file named `config.json` in the same directory as the binary. See [template below](#configjson)
+3. From a terminal, run `bir-eis-client <command> [options]`
+  * **<command>** - can be `authorize`, `send-invoices`, `inquire-invoices`
 
-## config.json
+<a name="configjson"></a>
+# Configuration
+  - **config.json**
 ```json
 {
   "eisEndpointBaseUrl": "https://eis-cert.bir.gov.ph",
@@ -32,3 +37,7 @@ You can download the EXE file from this project or use this as a module. You can
   "log": "info"
 }
 ```
+
+# Contribution
+
+Any form of contribution is welcome.
