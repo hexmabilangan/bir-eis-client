@@ -1,0 +1,50 @@
+{
+  "CompInvoiceId": "0000000004",
+  "IssueDtm": "20220217",
+  "EisUniqueId": "2022021731FL1P0700000004",
+  "DocType": "01",
+  "CorrYN": "N",
+  "CorrectionCd": "",
+  "PrevUniqueId": "",
+  "Rmk1": "test e-invoice : 2022021731FL1P0700000004",
+  "SellerInfo": {
+    "Tin": "999999999",
+    "BranchCd": "00000",
+    "Type": "0",
+    "RegNm": "DOUZONE",
+    "BusinessNm": "DOUZONE",
+    "Email": "tester@douzone.com",
+    "RegAddr": "130, Beodeul 1-gil, Namsan-myeon, Chuncheon-si, Gangwon-do, Republic of Korea"
+  },
+  "BuyerInfo": {
+    "Tin": "",
+    "BranchCd": "",
+    "Type": "",
+    "RegNm": "",
+    "BusinessNm": "",
+    "Email": "",
+    "RegAddr": ""
+  },
+  "VatSales": 980,
+  "OtherTaxRev": 57,
+  "ExemptSales": 970,
+  "ZeroSales": 680,
+  "TotSalesAmt": 2630,
+  "Discount": {
+    "ScAmt": 320,
+    "PwdAmt": 620,
+    "RegAmt": 620,
+    "SpeAmt": 360,
+    "Rmk2": ""
+  },
+  "TotNetSalesAftDisct": 767,
+  "VATAmt": 117.6,
+  "WithholdIncome": 32,
+  "WithholdBusVAT": 19,
+  "WithholdBusPT": 48,
+  "OtherNonTaxCharge": 5,
+  "NetAmtPay": 838.6,
+  "PtuNum": "00004",
+  "Msn": "test-msn-00004",
+  "Min": "test-min-00004"
+}

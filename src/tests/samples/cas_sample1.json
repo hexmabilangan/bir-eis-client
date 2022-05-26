@@ -1,0 +1,134 @@
+{
+  "CompInvoiceId": "0000000205",
+  "IssueDtm": "20220217",
+  "EisUniqueId": "2022021720146IT400000205",
+  "DocType": "01",
+  "TransClass": "01",
+  "CorrYN": "N",
+  "CorrectionCd": "",
+  "PrevUniqueId": "",
+  "Rmk1": "test e-invoice : 2022021720146IT400000205",
+  "SellerInfo": {
+    "Tin": "999999999",
+    "BranchCd": "00000",
+    "Type": "0",
+    "RegNm": "DOUZONE",
+    "BusinessNm": "DOUZONE",
+    "Email": "tester@douzone.com",
+    "RegAddr": "130, Beodeul 1-gil, Namsan-myeon, Chuncheon-si, Gangwon-do, Republic of Korea"
+  },
+  "BuyerInfo": {
+    "Tin": "225125979",
+    "BranchCd": "00000",
+    "RegNm": "DONG-A PHARMA PHILS. INC.",
+    "BusinessNm": "DONG-A PHARMA PHILS. INC.",
+    "Email": "donga_admin@donga.com",
+    "RegAddr": "UNIT 2803 ATLANTA CENTRE ILOILO 1500 PHILIPPINES",
+    "DevAddr": "UNIT 2803 ATLANTA CENTRE ILOILO 1500 PHILIPPINES",
+    "AirNum": "",
+    "AirNumDt": "",
+    "LadNum": "",
+    "LadNumDt": ""
+  },
+  "ItemList": [
+    {
+      "Nm": "Wehago",
+      "Desc": "Wehago",
+      "Qty": 2,
+      "Unit": "EA",
+      "UnitCost": 44130,
+      "SalesAmt": 88260,
+      "RegDscntAmt": 440,
+      "SpeDscntAmt": 40,
+      "NetSales": 87780
+    },
+    {
+      "Nm": "Nahago",
+      "Desc": "Nahago",
+      "Qty": 9,
+      "Unit": "EA",
+      "UnitCost": 77840,
+      "SalesAmt": 700560,
+      "RegDscntAmt": 550,
+      "SpeDscntAmt": 650,
+      "NetSales": 699360
+    },
+    {
+      "Nm": "ERP10",
+      "Desc": "ERP10",
+      "Qty": 9,
+      "Unit": "EA",
+      "UnitCost": 56070,
+      "SalesAmt": 504630,
+      "RegDscntAmt": 80,
+      "SpeDscntAmt": 390,
+      "NetSales": 504160
+    },
+    {
+      "Nm": "GroupWare",
+      "Desc": "GroupWare",
+      "Qty": 4,
+      "Unit": "EA",
+      "UnitCost": 54810,
+      "SalesAmt": 219240,
+      "RegDscntAmt": 840,
+      "SpeDscntAmt": 660,
+      "NetSales": 217740
+    },
+    {
+      "Nm": "A Item",
+      "Desc": "A Item",
+      "Qty": 4,
+      "Unit": "EA",
+      "UnitCost": 88700,
+      "SalesAmt": 354800,
+      "RegDscntAmt": 240,
+      "SpeDscntAmt": 580,
+      "NetSales": 353980
+    },
+    {
+      "Nm": "B Item",
+      "Desc": "B Item",
+      "Qty": 5,
+      "Unit": "EA",
+      "UnitCost": 97670,
+      "SalesAmt": 488350,
+      "RegDscntAmt": 200,
+      "SpeDscntAmt": 340,
+      "NetSales": 487810
+    },
+    {
+      "Nm": "C Item",
+      "Desc": "C Item",
+      "Qty": 2,
+      "Unit": "EA",
+      "UnitCost": 81020,
+      "SalesAmt": 162040,
+      "RegDscntAmt": 430,
+      "SpeDscntAmt": 790,
+      "NetSales": 160820
+    }
+  ],
+  "TotNetItemSales": 2511650,
+  "Discount": {
+    "ScAmt": 360,
+    "PwdAmt": 230,
+    "RegAmt": 740,
+    "SpeAmt": 550,
+    "Rmk2": ""
+  },
+  "OtherTaxRev": 530,
+  "TotNetSalesAftDisct": 2510300,
+  "VATAmt": 301398.0,
+  "WithholdIncome": 420,
+  "WithholdBusVAT": 990,
+  "WithholdBusPT": 93,
+  "OtherNonTaxCharge": 97,
+  "NetAmtPay": 2810385.0,
+  "ForCur": {
+    "Currency": "USD",
+    "ForexAmt": 380,
+    "ConvRate": 60
+  },
+  "PtuNum": "20146IT4-4"
+}

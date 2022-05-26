@@ -25,9 +25,7 @@ function getResponse(params = {}) {
     decryptedData: null,
     data: null,
     errorDetails: data.errorDetails || null,
-    errorCode: data.errorCode,
-    errorMessage: data.errorMessage || null,
-    hasError: Boolean(data.errorDetails || data.errorCode),
+    hasError: Boolean(data.errorDetails || response.status !== 200),
   };
 
   if (data.data) {
@@ -60,8 +58,12 @@ function getResponse(params = {}) {
   }
 
   if (output.hasError) {
-    const error = new Error(output.errorMessage || output.errorDetails.errorMessage);
-    error.code = output.errorCode || output.errorDetails.errorCode;
+    const error = new Error(output.errorDetails
+      ? output.errorDetails.errorMessage
+      : output.apiStatusText);
+    error.code = output.errorDetails
+      ? output.errorDetails.errorCode
+      : output.apiStatusCode;
     log.error(output);
     throw error;
   }

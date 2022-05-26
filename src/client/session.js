@@ -1,6 +1,12 @@
 const log = require('loglevel');
 
-const token = {};
+const token = {
+  accreditationId: null,
+  userId: null,
+  authToken: null,
+  sessionKey: null,
+  tokenExpiry: null,
+};
 
 function refreshToken() {
   if (!token.expiry) return true;
@@ -14,7 +20,12 @@ function setToken(obj) {
   log.info('Session token received');
 }
 
+function getToken() {
+  return { ...token };
+}
+
 module.exports = {
   refreshToken,
   setToken,
+  getToken,
 };

@@ -2,6 +2,7 @@ const log = require('loglevel');
 const forge = require('node-forge');
 const fns = require('date-fns');
 const axios = require('axios').default;
+const jws = require('jws');
 const { config } = require('./config');
 const { refreshToken } = require('./session');
 const { getResponse } = require('./helpers');
@@ -34,6 +35,18 @@ function toPublicPem(publicKey) {
     '-----BEGIN PUBLIC KEY-----',
     publicKey,
     '-----END PUBLIC KEY-----',
+  ].join('\n');
+}
+
+/**
+ * Convert private key to PEM
+ * @param {String} publicKey
+ */
+function toPrivatePem(privateKey) {
+  return [
+    '-----BEGIN PRIVATE KEY-----',
+    privateKey,
+    '-----END PRIVATE KEY-----',
   ].join('\n');
 }
 
@@ -133,6 +146,20 @@ function encryptHmac(params = {}) {
   return Buffer.from(hmac.digest().toHex(), 'hex').toString(encoding);
 }
 
+function jwsSign(params = {}) {
+  const {
+    header = { alg: 'RS256' },
+    payload = '',
+    secret = config.applicationPrivateKey,
+  } = params;
+
+  return jws.sign({
+    header,
+    payload,
+    secret: toPrivatePem(secret),
+  });
+}
+
 /**
  * Auth request
  * @param {} params
@@ -201,5 +228,6 @@ module.exports = {
   encryptAes,
   decryptAes,
   encryptHmac,
+  jwsSign,
   authorize,
 };

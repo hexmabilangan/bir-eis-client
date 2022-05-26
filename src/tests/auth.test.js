@@ -36,4 +36,11 @@ describe('auth', () => {
     const json = JSON.parse(output.data);
     expect(json).toStrictEqual({ foo: 'bar' });
   });
+
+  it('bir-eis authorize request', async () => {
+    expect.assertions(2);
+    const result = await auth.authorize();
+    expect(result.apiStatusCode).toBe(200);
+    expect(result.hasError).toBe(false);
+  });
 });
