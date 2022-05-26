@@ -1,6 +1,6 @@
 {
   "name": "@hexmabilangan/bir-eis-client",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "BIR Electronic Invoicing System - Client to connect to BIR-EIS",
   "main": "src/client/index.js",
   "bin": "src/cli/index.js",
