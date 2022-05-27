@@ -8,54 +8,56 @@ const yup = require('yup');
 
 function sellerInfo() {
   return yup.object().noUnknown().shape({
-    Tin: yup.string().max(9).required(),
-    BranchCd: yup.string().max(5).required(),
-    Type: yup.string().max(1).required(),
-    RegNm: yup.string().max(200).required(),
-    BusinessNm: yup.string().max(200).required(),
-    Email: yup.string().max(100).optional().email(),
-    RegAddr: yup.string().max(300).required(),
+    Tin: yup.string().max(9).required().label('Seller TIN'),
+    BranchCd: yup.string().max(5).required().label('Branch Code'),
+    Type: yup.string().max(1).required().label('Seller Type'),
+    RegNm: yup.string().max(200).required().label('Registered Name'),
+    BusinessNm: yup.string().max(200).required().label('Business Name/Trade Name'),
+    Email: yup.string().max(100).optional().label('Email address')
+      .email(),
+    RegAddr: yup.string().max(300).required().label('Registered Address'),
   });
 }
 
 function buyerInfo(params = {}) {
-  const { shape = {} } = params;
+  const { required = true } = params;
+  const isRequired = required ? 'required' : 'optional';
 
   // Buyer Information
   return yup.object().noUnknown().shape({
-    Tin: yup.string().max(9).required(),
-    BranchCd: yup.string().max(9).required(),
-    RegNm: yup.string().max(200).required(),
-    BusinessNm: yup.string().max(200).required(),
-    Email: yup.string().max(100).optional().email(),
-    RegAddr: yup.string().max(300).optional(),
-    ...shape,
+    Tin: yup.string().max(9)[isRequired]().label('Buyer TIN'),
+    BranchCd: yup.string().max(9)[isRequired]().label('Branch Code'),
+    RegNm: yup.string().max(200)[isRequired]().label('Registered Name'),
+    BusinessNm: yup.string().max(200)[isRequired]().label('Business Name/Trade Name'),
+    Email: yup.string().max(100).optional().label('Email address')
+      .email(),
+    RegAddr: yup.string().max(300).optional().label('Registered Address'),
   });
 }
 
 function proofOfDelivery() {
   // Proof of Delivery/Export
   return yup.object().noUnknown().shape({
-    DevAddr: yup.string().max(300).optional(),
-    AirNum: yup.string().max(50).optional(),
-    AirNumDt: yup.string().max(8).optional(),
-    LadNum: yup.string().max(50).optional(),
-    LadNumDt: yup.string().max(8).optional(),
+    DevAddr: yup.string().max(300).optional().label('Delivery Address'),
+    AirNum: yup.string().max(50).optional().label('Airway Bill Number'),
+    AirNumDt: yup.string().max(8).optional().label('Airway Bill Number Date'),
+    LadNum: yup.string().max(50).optional().label('Bill of Lading Number'),
+    LadNumDt: yup.string().max(8).optional().label('Bill of Lading Number Date'),
   });
 }
 
 function lineItem() {
   // Line items Information
   return yup.object().noUnknown().shape({
-    Nm: yup.string().max(100).required(),
-    Desc: yup.string().max(100).optional(),
-    Qty: yup.number().required(),
-    Unit: yup.string().max(50).optional(),
-    UnitCost: yup.number().required(),
-    SalesAmt: yup.number().required(),
-    RegDscntAmt: yup.number().required().default(0),
-    SpeDscntAmt: yup.number().required().default(0),
-    NetSales: yup.number().required(),
+    Nm: yup.string().max(100).required().label('Item Name'),
+    Desc: yup.string().max(100).optional().label('Item Description/Service'),
+    Qty: yup.number().required().default(0).label('Item Quantity'),
+    Unit: yup.string().max(50).optional().label('Item Unit of measure'),
+    UnitCost: yup.number().required().default(0).label('Unit Cost'),
+    SalesAmt: yup.number().required().default(0).label('Item Sales Amount'),
+    RegDscntAmt: yup.number().required().default(0).label('Regular Item Discount Amount'),
+    SpeDscntAmt: yup.number().required().default(0).label('Special Item Discount Amount'),
+    NetSales: yup.number().required().default(0).label('Net of  Item Sales'),
   });
 }
 
@@ -137,11 +139,7 @@ function crmPosIssuedInvoice() {
     // Seller Information
     SellerInfo: sellerInfo().required().label('Seller Information'),
     // Buyer Information
-    BuyerInfo: buyerInfo({
-      shape: {
-        Tin: yup.string().max(9).optional().label('Buyer TIN'),
-      },
-    }).concat(proofOfDelivery()).required().label('Buyer Information'),
+    BuyerInfo: buyerInfo({ required: false }),
     // Sales Information
     // - Sales Summary
     VATSales: yup.number().required().label('VATable Sales'),

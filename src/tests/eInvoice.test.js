@@ -9,7 +9,7 @@ const posSample1 = require('./samples/pos_sample1.json');
 
 describe('send invoices', () => {
   async function beforeAll() {
-    configure({ log: 'silent' }); // <--------------- update during manual testing
+    configure({ log: 'silent' }); // <-- update during manual testing
     await authorize();
   }
 
@@ -18,7 +18,17 @@ describe('send invoices', () => {
     await beforeAll();
     const output = await sendInvoices({
       source: 'CAS',
-      data: [casSample1],
+      data: [casSample1, casSample1],
+    });
+    expect(output.apiStatusCode).toBe(200);
+  });
+
+  it('send pos invoice 1', async () => {
+    expect.assertions(1);
+    await beforeAll();
+    const output = await sendInvoices({
+      source: 'POS',
+      data: [posSample1, posSample1],
     });
     expect(output.apiStatusCode).toBe(200);
   });
