@@ -10,7 +10,7 @@ You can download the binary files in the **Release section** or use this as a mo
 
 ## Features
   * authenticate
-  * send invoices (for development)
+  * send invoices
   * inquire invoices (for development)
 
 # Quick Guide
@@ -38,6 +38,10 @@ You can download the binary files in the **Release section** or use this as a mo
   "log": "info"
 }
 ```
+
+# Templates
+- [cas_template.csv](docs/templates/cas_template.csv) - CSV template to put all your invoices in
+- [cas_mapping_template.json](docs/templates/cas_mapping_template.json) - JSON mapping for the CSV input
 
 # Contribute
 
