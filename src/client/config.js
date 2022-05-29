@@ -6,10 +6,21 @@ let config;
 
 const defaults = {
   log: 'info',
+  csvOptions: {},
 };
 
 function configure(cfg = {}) {
-  Object.assign(config, defaults, cfg);
+  const newCfg = {
+    ...config,
+    ...defaults,
+    ...cfg,
+    csvOptions: {
+      ...config.csvOptions,
+      ...defaults.csvOptions,
+      ...(cfg.csvOptions || {}),
+    },
+  };
+  Object.assign(config, newCfg);
   log.setLevel(config.log);
 }
 

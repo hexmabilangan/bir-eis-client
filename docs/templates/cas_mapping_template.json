@@ -1,0 +1,68 @@
+{
+  "CompInvoiceId": "CompInvoiceId",
+  "IssueDtm": "IssueDtm",
+  "EisUniqueId": "EisUniqueId",
+  "DocType": "DocType",
+  "TransClass": "TransClass",
+  "CorrYN": "CorrYN",
+  "CorrectionCd": "CorrectionCd",
+  "PrevUniqueId": "PrevUniqueId",
+  "Rmk1": "Rmk1",
+  "SellerInfo": {
+    "Tin": "SellerInfo.Tin",
+    "BranchCd": "SellerInfo.BranchCd",
+    "Type": "SellerInfo.Type",
+    "RegNm": "SellerInfo.RegNm",
+    "BusinessNm": "SellerInfo.BusinessNm",
+    "Email": "SellerInfo.SellerInfo",
+    "RegAddr": "SellerInfo.RegAddr"
+  },
+  "BuyerInfo": {
+    "Tin": "BuyerInfo.Tin",
+    "BranchCd": "BuyerInfo.BranchCd",
+    "RegNm": "BuyerInfo.RegNm",
+    "BusinessNm": "BuyerInfo.BusinessNm",
+    "Email": "BuyerInfo.Email",
+    "RegAddr": "BuyerInfo.RegAddr",
+    "DevAddr": "BuyerInfo.DevAddr",
+    "AirNum": "BuyerInfo.AirNum",
+    "AirNumDt": "BuyerInfo.AirNumDt",
+    "LadNum": "BuyerInfo.LadNum",
+    "LadNumDt": "BuyerInfo.LadNumDt"
+  },
+  "ItemList": [
+    {
+      "Nm": "ItemList[].Nm",
+      "Desc": "ItemList[].Desc",
+      "Qty": "ItemList[].Qty",
+      "Unit": "ItemList[].Unit",
+      "UnitCost": "ItemList[].UnitCost",
+      "SalesAmt": "ItemList[].SalesAmt",
+      "RegDscntAmt": "ItemList[].RegDscntAmt",
+      "SpeDscntAmt": "ItemList[].SpeDscntAmt",
+      "NetSales": "ItemList[].NetSales"
+    }
+  ],
+  "TotNetItemSales": "TotNetItemSales",
+  "Discount": {
+    "ScAmt": "Discount.ScAmt",
+    "PwdAmt": "Discount.PwdAmt",
+    "RegAmt": "Discount.RegAmt",
+    "SpeAmt": "Discount.SpeAmt",
+    "Rmk2": "Discount.Rmk2"
+  },
+  "OtherTaxRev": "OtherTaxRev",
+  "TotNetSalesAftDisct": "TotNetSalesAftDisct",
+  "VATAmt": "VATAmt",
+  "WithholdIncome": "WithholdIncome",
+  "WithholdBusVAT": "WithholdBusVAT",
+  "WithholdBusPT": "WithholdBusPT",
+  "OtherNonTaxCharge": "OtherNonTaxCharge",
+  "NetAmtPay": "NetAmtPay",
+  "ForCur": {
+    "Currency": "ForCur.Currency",
+    "ForexAmt": "ForCur.ForexAmt",
+    "ConvRate": "ForCur.ConvRate"
+  },
+  "PtuNum": "PtuNum"
+}
