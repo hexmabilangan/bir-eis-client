@@ -20,6 +20,7 @@ function getWorker({ source }) {
   const date = fns.format(new Date(), 'yyyyMMdd_HHmmss_SSS');
   if (!fs.existsSync('output')) fs.mkdirSync('output', { recursive: true });
 
+  // Output Report
   const processed = toCsv({
     filename: `output/${date}-processed.csv`,
     fields: ['refId', 'CompInvoiceId', 'EisUniqueId', 'IssueDtm'],
@@ -52,17 +53,20 @@ function getWorker({ source }) {
   };
 
   return {
-    batch: (inv) => {
+    batch: async (inv) => {
       stats.invoice += 1;
       storage.push(inv);
       if (storage.length > 100) {
         stats.batch += 1;
         const data = storage.splice(0, 100);
-        push(data);
+        await push(data);
       }
     },
-    close: () => {
-      push(storage);
+    close: async () => {
+      await push(storage);
+      processed.close();
+      success.close();
+      error.close();
     },
   };
 }
@@ -96,7 +100,7 @@ async function runCmd(opts) {
   stats.end = new Date();
   stats.duration = stats.end.getTime() - stats.start.getTime();
 
-  console.log(stats);
+  log.info(stats);
 }
 
 async function sendInvoicesCmd(cli) {

@@ -28,7 +28,10 @@ function toCsv(params = {}) {
     fileDst.write(csv);
   };
 
-  return { push };
+  return {
+    push,
+    close: () => fileDst.close(),
+  };
 }
 
 module.exports = toCsv;
