@@ -36,6 +36,7 @@ async function sendInvoices(params = {}) {
     source, // must be cas, crm, pos
     data = [],
     submitId = genSubmitId({ date: today }),
+    throwErrors,
   } = params;
 
   const url = `${config.eisEndpointBaseUrl}${urlPath}`;
@@ -93,8 +94,10 @@ async function sendInvoices(params = {}) {
 
   const output = getResponse({
     response,
+    refId: submitId,
     key: token.sessionKey,
     decryptFn: decryptAes,
+    throwErrors,
   });
 
   log.debug(`Send Invoice Response: ${JSON.stringify(output)}`);

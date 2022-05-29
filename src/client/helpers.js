@@ -12,19 +12,23 @@ const timeZone = 'Asia/Manila';
 function getResponse(params = {}) {
   const {
     response = {},
+    refId, // any reference id
     key,
     decryptFn,
+    throwErrors = true,
   } = params;
   const { data = {} } = response;
 
   const output = {
+    refId,
     apiStatusCode: response.status,
     apiStatusText: response.statusText,
     status: data.status,
     encryptedData: data.data,
     decryptedData: null,
     data: null,
-    errorDetails: data.errorDetails || null,
+    errorMessage: (data.errorDetails || {}).errorMessage || null,
+    errorCode: (data.errorDetails || {}).errorCode || null,
     hasError: Boolean(data.errorDetails || response.status !== 200),
   };
 
@@ -58,14 +62,10 @@ function getResponse(params = {}) {
   }
 
   if (output.hasError) {
-    const error = new Error(output.errorDetails
-      ? output.errorDetails.errorMessage
-      : output.apiStatusText);
-    error.code = output.errorDetails
-      ? output.errorDetails.errorCode
-      : output.apiStatusCode;
+    const error = new Error(output.apiStatusText || output.errorMessage);
+    error.code = output.errorCode || output.apiStatusCode;
     log.error(output);
-    throw error;
+    if (throwErrors) throw error;
   }
 
   return output;

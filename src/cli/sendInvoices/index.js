@@ -1,9 +1,11 @@
 const fastq = require('fastq');
 const fs = require('fs');
 const log = require('loglevel');
+const fns = require('date-fns');
 
 const transformCsv = require('./transformCsv');
 const { authorize, sendInvoices } = require('../../client');
+const toCsv = require('../stream/toCsv');
 
 const stats = {};
 
@@ -15,15 +17,37 @@ function getWorker({ source }) {
   stats.error = 0;
   stats.success = 0;
 
+  const date = fns.format(new Date(), 'yyyyMMdd_HHmmss_SSS');
+  if (!fs.existsSync('output')) fs.mkdirSync('output', { recursive: true });
+
+  const processed = toCsv({
+    filename: `output/${date}-processed.csv`,
+    fields: ['refId', 'CompInvoiceId', 'EisUniqueId', 'IssueDtm'],
+  });
+  const success = toCsv({
+    filename: `output/${date}-success.csv`,
+    fields: ['refSubmitId', 'accreditationId', 'userId', 'ackId', 'responseDtm', 'description'],
+  });
+  const error = toCsv({
+    filename: `output/${date}-error.csv`,
+    fields: ['refId', 'apiStatusCode', 'apiStatusText', 'errorMessage', 'errorCode'],
+  });
+
   const push = (d) => {
     stats.batch += 1;
-    return queue.push({ source, data: d })
+    return queue.push({ source, data: d, throwErrors: false })
       .then((r) => {
-        if (!r.hasError) stats.success += 1;
-      })
-      .catch((err) => {
-        log.error(err);
-        stats.error += 1;
+        processed.push(d.map((x) => ({ ...x, refId: r.refId })));
+        if (!r.hasError) {
+          stats.success += 1;
+          success.push(r.data);
+        } else {
+          stats.error += 1;
+          error.push({
+            ...d,
+            ...r,
+          });
+        }
       });
   };
 
@@ -37,7 +61,9 @@ function getWorker({ source }) {
         push(data);
       }
     },
-    close: () => push(storage),
+    close: () => {
+      push(storage);
+    },
   };
 }
 
