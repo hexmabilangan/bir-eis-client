@@ -2,7 +2,7 @@ const log = require('loglevel');
 const forge = require('node-forge');
 const fns = require('date-fns');
 const axios = require('axios').default;
-const jws = require('jws');
+const jwt = require('jsonwebtoken');
 const { config } = require('./config');
 const { refreshToken } = require('./session');
 const { getResponse } = require('./helpers');
@@ -31,11 +31,11 @@ function getTmpSecretKey() {
  * @param {String} publicKey
  */
 function toPublicPem(publicKey) {
-  return [
-    '-----BEGIN PUBLIC KEY-----',
-    publicKey,
-    '-----END PUBLIC KEY-----',
-  ].join('\n');
+  const pem = ['-----BEGIN PUBLIC KEY-----'];
+  const str = String(publicKey).split(/.{,64}/);
+  pem.push(...str);
+  pem.push('-----END PUBLIC KEY-----');
+  return pem.join('\n');
 }
 
 /**
@@ -43,11 +43,11 @@ function toPublicPem(publicKey) {
  * @param {String} publicKey
  */
 function toPrivatePem(privateKey) {
-  return [
-    '-----BEGIN PRIVATE KEY-----',
-    privateKey,
-    '-----END PRIVATE KEY-----',
-  ].join('\n');
+  const pem = ['-----BEGIN PRIVATE KEY-----'];
+  const str = String(privateKey).split(/.{,64}/);
+  pem.push(...str);
+  pem.push('-----END PRIVATE KEY-----');
+  return pem.join('\n');
 }
 
 /**
@@ -148,16 +148,19 @@ function encryptHmac(params = {}) {
 
 function jwsSign(params = {}) {
   const {
-    header = { alg: 'RS256' },
     payload = '',
     secret = config.applicationPrivateKey,
+    options = {
+      algorithm: 'RS256',
+      keyid: config.applicationKeyId,
+    },
   } = params;
 
-  return jws.sign({
-    header,
+  return jwt.sign(
     payload,
-    secret: toPrivatePem(secret),
-  });
+    toPrivatePem(secret),
+    options,
+  );
 }
 
 /**
