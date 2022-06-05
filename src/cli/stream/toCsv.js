@@ -10,7 +10,7 @@ function toCsv(params = {}) {
   } = params;
 
   let header;
-  const fileDst = fs.createWriteStream(filename, { encoding });
+  let fileDst;
 
   const push = (data) => {
     // chunk is an object
@@ -25,12 +25,17 @@ function toCsv(params = {}) {
       ...csvOptions,
     });
 
+    if (!fileDst) {
+      fileDst = fs.createWriteStream(filename, { encoding });
+    }
     fileDst.write(csv);
   };
 
   return {
     push,
-    close: () => fileDst.close(),
+    close: () => {
+      if (fileDst) fileDst.close();
+    },
   };
 }
 
