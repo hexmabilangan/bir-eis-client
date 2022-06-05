@@ -2,6 +2,7 @@ const {
   configure,
   authorize,
   sendInvoices,
+  inquireInvoices,
 } = require('../client');
 
 const casSample1 = require('./samples/cas_sample1.json');
@@ -29,6 +30,15 @@ describe('send invoices', () => {
     const output = await sendInvoices({
       source: 'POS',
       data: [posSample1, posSample1],
+    });
+    expect(output.apiStatusCode).toBe(200);
+  });
+
+  it('inqure cas invoice 1', async () => {
+    expect.assertions(1);
+    await beforeAll();
+    const output = await inquireInvoices({
+      submitId: 'UPDATE-THIS-SUBMIT-ID',
     });
     expect(output.apiStatusCode).toBe(200);
   });

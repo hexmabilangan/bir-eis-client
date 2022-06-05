@@ -15,6 +15,7 @@ function getResponse(params = {}) {
     refId, // any reference id
     key,
     decryptFn,
+    isEncrypted = true,
     throwErrors = true,
   } = params;
   const { data = {} } = response;
@@ -24,7 +25,7 @@ function getResponse(params = {}) {
     apiStatusCode: response.status,
     apiStatusText: response.statusText,
     status: data.status,
-    encryptedData: data.data,
+    encryptedData: isEncrypted ? data.data : null,
     decryptedData: null,
     data: null,
     errorMessage: (data.errorDetails || {}).errorMessage || null,
@@ -32,7 +33,7 @@ function getResponse(params = {}) {
     hasError: Boolean(data.errorDetails || response.status !== 200),
   };
 
-  if (data.data) {
+  if (isEncrypted && data.data) {
     const decrypted = decryptFn({
       key,
       data: data.data,
@@ -41,7 +42,8 @@ function getResponse(params = {}) {
   }
 
   try {
-    output.data = JSON.parse(output.decryptedData);
+    if (isEncrypted) output.data = JSON.parse(output.decryptedData);
+    else output.data = data.data;
   } catch (e) {
     // do nothing
   }
