@@ -6,10 +6,19 @@ const yup = require('yup');
  * EIS e-invoice JSON File format v2.01_3.25.22_BIR_updated_f.xlsx (218.93 KB)
  */
 
+function padStart(targetLen, padStr, options = {}) {
+  const { retainEmpty = true } = options;
+  return (val) => {
+    if (String(val).length === 0 && retainEmpty) return val;
+    return String(val).padStart(targetLen, padStr);
+  };
+}
+
 function sellerInfo() {
   return yup.object().noUnknown().shape({
     Tin: yup.string().max(9).required().label('Seller TIN'),
-    BranchCd: yup.string().max(5).required().label('Branch Code'),
+    BranchCd: yup.string().max(5).required().label('Branch Code')
+      .transform(padStart(5, '0')),
     Type: yup.string().max(1).required().label('Seller Type'),
     RegNm: yup.string().max(200).required().label('Registered Name'),
     BusinessNm: yup.string().max(200).required().label('Business Name/Trade Name'),
@@ -26,7 +35,8 @@ function buyerInfo(params = {}) {
   // Buyer Information
   return yup.object().noUnknown().shape({
     Tin: yup.string().max(9)[isRequired]().label('Buyer TIN'),
-    BranchCd: yup.string().max(9)[isRequired]().label('Branch Code'),
+    BranchCd: yup.string().max(9)[isRequired]().label('Branch Code')
+      .transform(padStart(5, '0')),
     RegNm: yup.string().max(200)[isRequired]().label('Registered Name'),
     BusinessNm: yup.string().max(200)[isRequired]().label('Business Name/Trade Name'),
     Email: yup.string().max(100).optional().label('Email address')
@@ -86,12 +96,15 @@ function casIssuedInvoice() {
     IssueDtm: yup.string().max(8).required().label('SI/OR/SB/DM/CM Issuance Date'),
     // E-Invoice Basic information
     EisUniqueId: yup.string().max(24).required().label('BIR e-invoice Unique ID'),
-    DocType: yup.string().max(2).required().label('Document Type'),
-    TransClass: yup.string().max(2).required().label('Transaction Classification'),
+    DocType: yup.string().max(2).required().label('Document Type')
+      .transform(padStart(2, '0')),
+    TransClass: yup.string().max(2).required().label('Transaction Classification')
+      .transform(padStart(2, '0')),
     // - Invoice Correction
     CorrYN: yup.string().max(1).required().label('Correction Yes or Not')
       .oneOf(['Y', 'N']),
-    CorrectionCd: yup.string().max(2).optional().label('e-Invoice correction code'),
+    CorrectionCd: yup.string().max(2).optional().label('e-Invoice correction code')
+      .transform(padStart(2, '0')),
     PrevUniqueId: yup.string().max(24).optional().label('E-Invoice Unique ID of the document to be corrected'),
     Rmk1: yup.string().max(500).optional().label('Remarks1'),
     // Seller Information
